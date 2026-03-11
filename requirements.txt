@@ -4,3 +4,4 @@ mcp
 sse-starlette
 requests
 pydantic
+psutil
