@@ -1,19 +1,19 @@
 # RAE-Lab: Intelligence Observatory & Research Environment 🔬
 
-RAE-Lab to centrum analityczne i badawcze ekosystemu RAE-Suite. Jego zadaniem jest zbieranie metryk z pracy wszystkich agentów, analizowanie ich wydajności i generowanie wniosków optymalizacyjnych dla strategii **Kaizen** i **Lean**.
+RAE-Lab is the analytical and research hub of the RAE-Suite ecosystem. Its task is to collect metrics from the work of all agents, analyze their performance, and generate optimization insights for **Kaizen** and **Lean** strategies.
 
-## 🧬 Główne Funkcje
+## 🧬 Core Functions
 
-1.  **Experiment Manager**: System zbierania raportów JSON z modułów Hive i Phoenix. Każda akcja inżynieryjna jest traktowana jako eksperyment o mierzalnym wyniku.
-2.  **Metrics Aggregator**: Silnik wyliczający globalne wskaźniki systemu:
-    *   **Success Rate**: Procent zadań wykonanych poprawnie w pierwszej iteracji.
-    *   **Token Econometrics (Lean)**: Analiza kosztów i wydajności modeli (Gemini vs DeepSeek vs Qwen).
-    *   **System Latency**: Czas potrzebny na przejście od planu do działającego kodu.
-3.  **Reflective Feedback Loop**: Lab dostarcza "lekcje" do RAE-Memory, dzięki czemu system uczy się, który model najlepiej radzi sobie z konkretnym typem zadania.
+1.  **Experiment Manager**: A system for collecting JSON reports from Hive and Phoenix modules. Every engineering action is treated as an experiment with a measurable outcome.
+2.  **Metrics Aggregator**: An engine that calculates global system indicators:
+    *   **Success Rate**: Percentage of tasks completed correctly in the first iteration.
+    *   **Token Econometrics (Lean)**: Analysis of model costs and efficiency (Gemini vs. DeepSeek vs. Qwen).
+    *   **System Latency**: Time required to move from a plan to working code.
+3.  **Reflective Feedback Loop**: The Lab provides "lessons learned" to RAE-Memory, helping the system learn which model handles specific task types best.
 
-## 📁 Struktura Danych
-*   `/storage/experiments`: Surowe dane z każdego skanowania i operacji.
-*   `/storage/insights`: Przetworzone raporty strategiczne.
+## 📁 Data Structure
+*   `/storage/experiments`: Raw data from every scan and operation.
+*   `/storage/insights`: Processed strategic reports.
 
 ---
 **Module Status**: Active Research
