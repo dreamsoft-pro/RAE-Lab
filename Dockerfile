@@ -2,7 +2,7 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-RUN pip install fastapi uvicorn mcp sse-starlette requests pydantic
+RUN pip install fastapi uvicorn mcp sse-starlette requests pydantic psutil
 
 COPY . .
 
