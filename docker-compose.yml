@@ -1,0 +1,27 @@
+services:
+  rae-lab:
+    build: .
+    container_name: rae-lab
+    restart: unless-stopped
+    command: python metrics_aggregator.py
+    ports:
+      - "8007:8000" # MCP SSE Port
+    environment:
+      - RAE_PROJECT_NAME=dreamsoft_factory
+      - RAE_API_URL=http://rae-api-dev:8000
+      - PYTHONPATH=/app:/app/rae_libs
+    volumes:
+      - .:/app
+      - ../RAE-agentic-memory/rae-core/rae_core:/app/rae_libs/rae_core
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - rae-internal
+
+networks:
+  rae-internal:
+    external: true
+    name: rae-internal
