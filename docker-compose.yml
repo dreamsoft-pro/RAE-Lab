@@ -3,16 +3,13 @@ services:
     build: .
     container_name: rae-lab
     restart: unless-stopped
-    command: uvicorn metrics_aggregator:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn metrics_aggregator:app --host 0.0.0.0 --port 8000
     ports:
       - "8007:8000" # MCP SSE Port
     environment:
       - RAE_PROJECT_NAME=dreamsoft_factory
       - RAE_API_URL=http://rae-api-dev:8000
       - PYTHONPATH=/app:/app/rae_libs
-    volumes:
-      - .:/app
-      - ../RAE-agentic-memory/rae-core/rae_core:/app/rae_libs/rae_core
     healthcheck:
       test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/health\")' || exit 1"]
       interval: 30s

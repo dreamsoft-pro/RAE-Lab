@@ -1,0 +1,8 @@
+services:
+  rae-lab:
+    command: uvicorn metrics_aggregator:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - RAE_PROFILE=dev
+    volumes:
+      - .:/app
+      - ../RAE-agentic-memory/rae-core/rae_core:/app/rae_libs/rae_core
