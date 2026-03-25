@@ -31,7 +31,7 @@ async def test_trend_calculation_down(temp_storage, mock_rae_api):
     mock_rae_api.return_value = mock_resp
     
     manager = ExperimentManager(storage_path=temp_storage)
-    current_scan = {"project_id": "test-proj", "quality_score": 0.5, "complexity": 10}
+    current_scan = {"project": "test-proj", "quality_score": 0.5, "complexity": 10}
     
     insight = await manager.generate_kaizen_insight("test-proj", current_scan)
     
@@ -53,7 +53,7 @@ async def test_trend_calculation_up(temp_storage, mock_rae_api):
     mock_rae_api.return_value = mock_resp
     
     manager = ExperimentManager(storage_path=temp_storage)
-    current_scan = {"project_id": "test-proj", "quality_score": 0.9, "complexity": 10}
+    current_scan = {"project": "test-proj", "quality_score": 0.9, "complexity": 10}
     
     insight = await manager.generate_kaizen_insight("test-proj", current_scan)
     

@@ -27,7 +27,7 @@ class ExperimentManager:
 
     async def register_scan(self, report_data: Dict[str, Any]):
         """Registers a quality scan with deep metadata enrichment."""
-        project = report_data.get("project_id", "unknown")
+        project = report_data.get("project", "unknown")
         
         # 1. Advanced Metrics Calculation (Deep Lab Logic)
         quality_score = report_data.get("quality_score", 0.0)
@@ -53,14 +53,14 @@ class ExperimentManager:
         
         return await self.generate_kaizen_insight(project, enriched_data)
 
-    async def generate_kaizen_insight(self, project_id: str, current_scan: Dict[str, Any]):
+    async def generate_kaizen_insight(self, project: str, current_scan: Dict[str, Any]):
         """Generates a Kaizen Insight based on historical trends (RAE-First)."""
         try:
             # 1. RAE-First Retrieval
             async with httpx.AsyncClient(timeout=10.0) as client:
                 resp = await client.post(f"{self.api_url}/v2/memories/query", json={
-                    "query": f"kaizen metrics history for {project_id}",
-                    "project": project_id,
+                    "query": f"kaizen metrics history for {project}",
+                    "project": project,
                     "k": 5
                 })
                 history = resp.json().get("results", []) if resp.status_code == 200 else []
@@ -74,7 +74,7 @@ class ExperimentManager:
             trend = "up" if current_lean >= avg_lean else "down"
             
             insight = {
-                "project": project_id,
+                "project": project,
                 "timestamp": datetime.utcnow().isoformat(),
                 "swarm_id": current_scan.get("swarm_id"),
                 "kaizen_metrics": current_scan.get("kaizen_metrics"),
@@ -85,12 +85,12 @@ class ExperimentManager:
             # 3. Permanent Insight Persistence (The "Advanced" part)
             # Storing as a proper KAIZEN_REPORT type
             self.bridge.save_event(
-                content=f"Wniosek Kaizen dla {project_id}: {insight['suggestion']}",
-                human_label=f"Wniosek Kaizen: {project_id} ({trend.upper()})",
+                content=f"Wniosek Kaizen dla {project}: {insight['suggestion']}",
+                human_label=f"Wniosek Kaizen: {project} ({trend.upper()})",
                 layer="reflective",
                 metadata={
                     "type": "kaizen_report",
-                    "project": project_id,
+                    "project": project,
                     "metrics": insight["kaizen_metrics"],
                     "trend": trend
                 }

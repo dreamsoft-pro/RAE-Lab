@@ -48,11 +48,11 @@ async def handle_list_tools():
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "project_id": {"type": "string"},
+                    "project": {"type": "string"},
                     "quality_score": {"type": "number"},
                     "complexity": {"type": "number"}
                 },
-                "required": ["project_id", "quality_score"]
+                "required": ["project", "quality_score"]
             }
         )
     ]
@@ -103,7 +103,7 @@ if __name__ == "__main__":
             manager = ExperimentManager()
             # Symulujemy raport skanu dla CLI (w przyszłości tutaj realna analiza statyczna)
             mock_report = {
-                "project_id": project, 
+                "project": project, 
                 "file": path, 
                 "quality_score": 0.72, 
                 "complexity": 15,
