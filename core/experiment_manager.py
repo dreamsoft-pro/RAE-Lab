@@ -9,6 +9,7 @@ import logging
 
 from rae_libs.rae_core.utils.memory_bridge import RAEMemoryBridge
 from rae_libs.rae_core.utils.context import RAEContextLocator
+from core.shadow_guardrail_manager import ShadowGuardrailManager
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,11 @@ class ExperimentManager:
         
         # Unified Bridge with Advanced Labeling
         self.bridge = RAEMemoryBridge(project_name="rae-lab")
+        
+        # Shadow Guardrail Manager
+        self.guardrail_manager = ShadowGuardrailManager(
+            storage_path=os.path.join(self.storage_path, "rules.json")
+        )
 
     async def register_scan(self, report_data: Dict[str, Any]):
         """Registers a quality scan with deep metadata enrichment."""
