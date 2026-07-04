@@ -24,18 +24,21 @@ async def test_trend_calculation_down(temp_storage, mock_rae_api):
     mock_resp.status_code = 200
     mock_resp.json.return_value = {
         "results": [
-            {"metadata": {"score": 0.9}},
-            {"metadata": {"score": 0.8}}
+            {"metadata": {"context": {"kaizen_metrics": {"lean_score": 0.9}}}},
+            {"metadata": {"context": {"kaizen_metrics": {"lean_score": 0.8}}}}
         ]
     }
     mock_rae_api.return_value = mock_resp
     
     manager = ExperimentManager(storage_path=temp_storage)
-    current_scan = {"project": "test-proj", "quality_score": 0.5, "complexity": 10}
+    current_scan = {
+        "project": "test-proj",
+        "kaizen_metrics": {"lean_score": 0.5, "complexity_index": 10}
+    }
     
     insight = await manager.generate_kaizen_insight("test-proj", current_scan)
     
-    assert insight["metrics"]["trend"] == "down"
+    assert insight["trend"] == "down"
     assert "OSTRZEŻENIE" in insight["suggestion"]
 
 @pytest.mark.asyncio
@@ -46,16 +49,19 @@ async def test_trend_calculation_up(temp_storage, mock_rae_api):
     mock_resp.status_code = 200
     mock_resp.json.return_value = {
         "results": [
-            {"metadata": {"score": 0.3}},
-            {"metadata": {"score": 0.4}}
+            {"metadata": {"context": {"kaizen_metrics": {"lean_score": 0.3}}}},
+            {"metadata": {"context": {"kaizen_metrics": {"lean_score": 0.4}}}}
         ]
     }
     mock_rae_api.return_value = mock_resp
     
     manager = ExperimentManager(storage_path=temp_storage)
-    current_scan = {"project": "test-proj", "quality_score": 0.9, "complexity": 10}
+    current_scan = {
+        "project": "test-proj",
+        "kaizen_metrics": {"lean_score": 0.9, "complexity_index": 10}
+    }
     
     insight = await manager.generate_kaizen_insight("test-proj", current_scan)
     
-    assert insight["metrics"]["trend"] == "up"
+    assert insight["trend"] == "up"
     assert "STABILNIE" in insight["suggestion"]

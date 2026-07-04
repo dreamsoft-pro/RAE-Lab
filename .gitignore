@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+rae_libs/
+.pytest_cache/
+.coverage
+htmlcov/
