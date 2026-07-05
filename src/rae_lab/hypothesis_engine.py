@@ -2,7 +2,6 @@ from rae_core.models.improvement import Hypothesis
 from rae_core.models.failure import FailureLearningRecord
 from rae_core.models.evidence import OutcomeRecord
 from typing import List
-import uuid
 import logging
 
 logger = logging.getLogger(__name__)

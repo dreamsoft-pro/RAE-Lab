@@ -1,26 +1,7 @@
-# failure_mining_engine.py
-try:
-    from rae_core.models.failure import FailureLearningRecord
-    from rae_core.models.improvement import FailurePatternPack
-except ImportError:
-    try:
-        from rae_libs.rae_core.models.failure import FailureLearningRecord
-        from rae_libs.rae_core.models.improvement import FailurePatternPack
-    except ImportError:
-        # Generic mock fallback for sandboxed offline run
-        class FailureLearningRecord:
-            def __init__(self):
-                self.failure_id = "mock"
-                self.failure_type = "mock"
-                self.wasted_cost = 0.0
-                self.future_guardrail = "mock"
-                self.retry_recommendation = "mock"
-        class FailurePatternPack:
-            def __init__(self, **kwargs): pass
-
+from rae_core.models.failure import FailureLearningRecord
+from rae_core.models.improvement import FailurePatternPack
 from typing import List
 from collections import Counter
-import uuid
 
 class FailureMiningEngine:
     MIN_PATTERN_COUNT = 2
