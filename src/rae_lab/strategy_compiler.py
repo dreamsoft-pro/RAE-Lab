@@ -1,4 +1,4 @@
-from rae_core.models.improvement import InsightPack, PolicyPatchProposal
+from rae_core.models.improvement import InsightPack
 from typing import List
 
 class StrategyCompiler:
