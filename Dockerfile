@@ -5,4 +5,4 @@ COPY packages/rae-core /app/packages/rae-core
 RUN pip install -r requirements.txt && \
     pip install -e packages/rae-core
 ENV PYTHONPATH=/app/src
-CMD ["uvicorn", "rae_lab.main:app", "--host", "0.0.0.0", "--port", "8011"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8011"]
