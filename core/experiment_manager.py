@@ -7,8 +7,12 @@ from datetime import datetime
 from typing import Dict, Any, List, Optional
 import logging
 
-from rae_libs.rae_core.utils.memory_bridge import RAEMemoryBridge
-from rae_libs.rae_core.utils.context import RAEContextLocator
+try:
+    from rae_libs.rae_core.utils.memory_bridge import RAEMemoryBridge
+    from rae_libs.rae_core.utils.context import RAEContextLocator
+except ImportError:
+    from rae_core.utils.memory_bridge import RAEMemoryBridge
+    from rae_core.utils.context import RAEContextLocator
 
 logger = logging.getLogger(__name__)
 
